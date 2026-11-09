@@ -1,0 +1,30 @@
+{
+  "name": "Xiǎobù Kelas V1.5",
+  "short_name": "Xiǎobù Kelas",
+  "description": "Kelas Mandarin 林老師 (華語準備級課程一) 16 lesson (準備級 L1–6 + 當代中文 B1 L6–16): babak, flashcard, kuis, arcade.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f1ff",
+  "theme_color": "#f6f1ff",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
