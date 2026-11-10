@@ -1,0 +1,4 @@
+mdict.js berisi data turunan dari:
+- CC-CEDICT (MDBG), lisensi Creative Commons Attribution-Share Alike 3.0: https://creativecommons.org/licenses/by-sa/3.0/ . File mdict.js (turunan) dibagikan dengan lisensi yang sama.
+- Unihan kMandarin / kHanyuPinlu melalui proyek pinyin-data (mozillazg), lisensi MIT.
+Pinyin dinormalisasi ke bacaan Taiwan oleh Xiaobu.
