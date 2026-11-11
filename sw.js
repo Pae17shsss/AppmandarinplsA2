@@ -1,6 +1,6 @@
 // v2 — network-first for the app shell (so bug fixes arrive right away), cache fallback offline
-const V = 'xiaobu-kelas-k160';
-const CORE = ['./', 'index.html', 'app.css?v=k160', 'app.js?v=k160', 'data.js?v=k160', 'tocfl.js?v=k160', 'sd.js?v=k160', 'hw.js?v=k160', 'manifest.webmanifest', 'icon-192.png', 'apple-touch-icon.png'];
+const V = 'xiaobu-kelas-k170';
+const CORE = ['./', 'index.html', 'app.css?v=k170', 'app.js?v=k170', 'data.js?v=k170', 'tocfl.js?v=k170', 'sd.js?v=k170', 'hw.js?v=k170', 'manifest.webmanifest', 'icon-192.png', 'apple-touch-icon.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V && !k.startsWith('xb-tts')).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 function timeout(ms) { return new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms)); }

@@ -9271,7 +9271,7 @@ function loadCtx(cb) {
   if (CXD) { if (cb) cb(); return; }
   if (cb) CX_WAIT.push(cb);
   if (CX_BUSY) return; CX_BUSY = true; CX_ERR = false;
-  const s = document.createElement('script'); s.src = 'ctx.js?v=k160'; s.async = true;
+  const s = document.createElement('script'); s.src = 'ctx.js?v=k170'; s.async = true;
   s.onload = () => { CX_BUSY = false; CXD = window.XB_CTX || {}; const w = CX_WAIT; CX_WAIT = []; w.forEach(f => { try { f(); } catch (e) { console.error('ctx cb', e); } }); };
   s.onerror = () => { CX_BUSY = false; CX_ERR = true; const had = CX_WAIT.length; CX_WAIT = []; s.remove(); if (ROUTE === 'kalimat' && !SES) render(); else if (had) toast(t('Kalimat belum bisa dimuat — cek koneksi, lalu coba lagi.')); };
   document.head.appendChild(s);
@@ -9650,7 +9650,7 @@ setTimeout(() => { const f = () => { try { loadCtx(); } catch (e) {} }; if ('req
 /* ========== KELAS · 華語準備級課程(一) L1–6 + 當代中文課程 第一冊 L6–16 — Xiǎobù Kelas V0.2 ==========
    Materi diambil dari PDF kelas: kosakata (inti + tambahan), dialog, grammar, latihan.
    Semua kata lesson memakai mesin yang sama (SRS, suara, arcade), tapi arti & pengecoh diambil dari lesson. */
-const KLS_VER = 'V1.6';
+const KLS_VER = 'V1.7';
 ICON_PATHS.class = '<path d="M3 8.2 12 4l9 4.2-9 4.2z"/><path d="M6.6 10v4.6c0 1.6 2.4 3 5.4 3s5.4-1.4 5.4-3V10"/><path d="M21 8.2v5.4"/>';
 ICON_PATHS.cards = '<rect x="3.2" y="6.4" width="12.4" height="14" rx="2.2"/><path d="M8.4 6.4V5a1.8 1.8 0 0 1 1.8-1.8h8.6A1.8 1.8 0 0 1 20.6 5v11.2a1.8 1.8 0 0 1-1.8 1.8h-3.2"/>';
 ICON_PATHS.mic = '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.6 11a6.4 6.4 0 0 0 12.8 0M12 17.4V21M8.6 21h6.8"/>';
@@ -10511,7 +10511,7 @@ let TFD = null; let TF_BUSY = false;
 function loadTF(cb) {
   if (window.TF_FORMS) { TFD = { icons: window.TF_ICONS, forms: window.TF_FORMS }; return cb && cb(); }
   if (TF_BUSY) return; TF_BUSY = true;
-  const s = document.createElement('script'); s.src = 'tocfl.js?v=k160'; s.async = true;
+  const s = document.createElement('script'); s.src = 'tocfl.js?v=k170'; s.async = true;
   s.onload = () => { TF_BUSY = false; TFD = { icons: window.TF_ICONS, forms: window.TF_FORMS }; if (cb) cb(); };
   s.onerror = () => { TF_BUSY = false; s.remove(); toast(t('Soal TOCFL belum bisa dimuat — cek koneksi, lalu coba lagi.')); };
   document.head.appendChild(s);
@@ -14346,7 +14346,7 @@ function hwLib() {
   if (hwLib.p) return hwLib.p;
   if (hwLib.failAt && Date.now() - hwLib.failAt < 30000) return Promise.reject(new Error('lib'));
   hwLib.p = new Promise((res, rej) => {
-    let s = document.createElement('script'); s.src = 'hw.js?v=k160'; s.async = true; let local = true;
+    let s = document.createElement('script'); s.src = 'hw.js?v=k170'; s.async = true; let local = true;
     let tm = setTimeout(() => fail(), 10000);
     function fail() { clearTimeout(tm);
       if (local) { local = false; s.remove(); s = document.createElement('script'); s.src = WR_LIB; s.async = true; s.onload = onl; s.onerror = () => { s.remove(); fail(); }; tm = setTimeout(() => fail(), 10000); document.head.appendChild(s); return; } hwLib.p = null; hwLib.failAt = Date.now(); loadHanziWriter.failed = true; rej(new Error('lib')); }
@@ -23719,7 +23719,7 @@ function ntDict(cb) {
   if (MD) { if (cb) cb(); return; }
   if (cb) MD_WAIT.push(cb);
   if (MD_BUSY) return; MD_BUSY = true;
-  const s = document.createElement('script'); s.src = 'mdict.js?v=k160'; s.async = true;
+  const s = document.createElement('script'); s.src = 'mdict.js?v=k170'; s.async = true;
   s.onload = () => { try { ntBuildDict(); } catch (e) { console.error('mdict', e); } MD_BUSY = false; const w = MD_WAIT; MD_WAIT = []; w.forEach(f => { try { f(); } catch (e) { console.error(e); } }); };
   s.onerror = () => { MD_BUSY = false; MD_WAIT = []; s.remove(); NT.err = 'dict'; if (ROUTE === 'nonton') ntRender(); };
   document.head.appendChild(s);
@@ -24222,5 +24222,89 @@ Object.assign(I18N_VI, {
   'Simpan ke kartu hafalan': 'Lưu vào thẻ ghi nhớ', 'Sudah di kartu hafalan': 'Đã có trong thẻ', 'Ketuk-sinkron': 'Chạm để đồng bộ', 'Baris ini mulai': 'Dòng này bắt đầu', 'Nonton': 'Xem',
   'Kecepatan 1×': 'Tốc độ 1×', 'Kecepatan 0.75×': 'Tốc độ 0.75×', 'Kecepatan 0.5×': 'Tốc độ 0.5×', 'Putar semua (suara app)': 'Phát tất cả', 'Berhenti': 'Dừng', 'Kembali': 'Quay lại'
 });
+
+/* ========== V1.7 halus.js — "Halus": strip minggu di Beranda, Jelajahi ringkas, peta lesson berbentuk jalur, transisi halaman ========== */
+const V17 = { all: false, last: null };
+try { V17.all = localStorage.getItem('xiaobu.v17.all') === '1'; } catch (e) {}
+(function () {
+  const T = {
+    'Minggu ini': ['This week', 'Ngayong linggo', 'Tuần này'], 'Lanjut': ['Continue', 'Ituloy', 'Tiếp tục'],
+    'Lihat semua ({n})': ['Show all ({n})', 'Ipakita lahat ({n})', 'Xem tất cả ({n})'], 'Ringkas': ['Show less', 'Paikliin', 'Thu gọn'],
+    '{a}/{b} babak': ['{a}/{b} rounds', '{a}/{b} round', '{a}/{b} vòng'], 'Khatam': ['Completed', 'Tapos na', 'Hoàn thành'],
+    '{n} hari beruntun': ['{n}-day streak', '{n} araw na sunod-sunod', 'Chuỗi {n} ngày']
+  };
+  for (const k in T) { if (!I18N[k]) I18N[k] = [T[k][0], T[k][1]]; if (typeof I18N_VI !== 'undefined' && !I18N_VI[k]) I18N_VI[k] = T[k][2]; }
+})();
+
+/* ---- 1. strip minggu (Sen–Min) di hero Beranda ---- */
+function v17Week() {
+  const tk = todayKey(); const now = new Date(); const dow = (now.getDay() + 6) % 7;   // Senin = 0
+  const loc = LOCALE[S.settings.ui] || 'id-ID'; const st = streakNow();
+  const cells = []; for (let k = 0; k < 7; k++) {
+    const key = keyAdd(tk, k - dow); const [y, m, d] = key.split('-').map(Number);
+    const hit = k <= dow && dayHit(key);
+    cells.push(`<span class="v17-d ${hit ? 'on' : ''} ${k === dow ? 'today' : ''} ${k > dow ? 'next' : ''}"><small>${new Date(y, m - 1, d).toLocaleDateString(loc, { weekday: 'short' }).slice(0, 3)}</small><i>${hit ? ICON('check') : d}</i></span>`);
+  }
+  return `<a class="v17-week" href="#stats" aria-label="${t('Minggu ini')}"><span class="v17-wk-h"><b>${t('Minggu ini')}</b><span>${ICON('flame')} ${t('{n} hari beruntun', { n: st })}</span></span><span class="v17-wk-d">${cells.join('')}</span></a>`;
+}
+
+/* ---- 2. Beranda: Jelajahi ringkas (6 petak dulu, sisanya dibuka sekali ketuk) ---- */
+const v17HomeBase = vHome;
+vHome = function () {
+  const h = v17HomeBase();
+  try {
+    const F = u2Frag(h);
+    const hero = F.querySelector('.u2-hero');
+    if (hero) hero.insertAdjacentHTML('beforeend', v17Week());
+    const bento = F.querySelector('.u2-bento');
+    if (bento) {
+      const tiles = [...bento.children]; let KEEP = 7;
+      /* petak lebar memakan 2 kolom: jaga baris terakhir tetap penuh di HP */
+      if (tiles.slice(0, KEEP).filter(e => !/u2-(xl|wide)/.test(e.className)).length % 2) KEEP++;
+      if (tiles.length > KEEP + 2) {
+        tiles.slice(KEEP).forEach(e => e.classList.add('v17-xtra'));
+        if (V17.all) bento.classList.add('all');
+        const n = tiles.length;
+        bento.insertAdjacentHTML('afterend', `<button class="v17-more" data-v17="more" data-n="${n}" aria-expanded="${V17.all}"><span>${V17.all ? t('Ringkas') : t('Lihat semua ({n})', { n })}</span>${ICON('chevron')}</button>`);
+      }
+    }
+    const tp = document.createElement('div'); tp.appendChild(F); return tp.innerHTML;
+  } catch (e) { console.error('v17Home', e); return h; }
+};
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('[data-v17="more"]'); if (!b) return;
+  V17.all = !V17.all; try { localStorage.setItem('xiaobu.v17.all', V17.all ? '1' : '0'); } catch (err) {}
+  const bento = b.previousElementSibling; if (bento) bento.classList.toggle('all', V17.all);
+  b.setAttribute('aria-expanded', V17.all); b.querySelector('span').textContent = V17.all ? t('Ringkas') : t('Lihat semua ({n})', { n: b.dataset.n });
+});
+
+/* ---- 3. Kelas: peta lesson berbentuk jalur (cincin progres + 6 titik babak) ---- */
+const v17LessonBase = lessonCard;
+lessonCard = function (L) {
+  try {
+    const p = lessonPct(L.n); const done = lessonDone(L.n); const nl = nextLesson(L.course); const now = !done && nl === L.n;
+    const R = 21, C = 2 * Math.PI * R; const nd = KROUNDS.filter(r => roundDone(L.n, r.k)).length;
+    const ring = `<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="${R}" class="v17-rt"/><circle cx="26" cy="26" r="${R}" class="v17-rp" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - (done ? 1 : p))}" transform="rotate(-90 26 26)"/></svg>`;
+    const dots = KROUNDS.map(r => `<i class="${roundDone(L.n, r.k) ? 'on' : ''}"></i>`).join('');
+    const end = done ? `<span class="v17-end ok">${ICON('check')}</span>` : now ? `<span class="v17-end v17-go">${t('Lanjut')}</span>` : `<span class="v17-end">${ICON('chevron')}</span>`;
+    return `<button class="kl-lc v17-lc ${done ? 'done' : ''} ${now ? 'now' : ''}" data-a="klopen" data-v="${L.n}" style="--p:${p}">
+      <span class="v17-node">${ring}<b>${done ? ICON('crown') : L.num}</b></span>
+      <span class="v17-lb"><small>${lnLong(L.n)}</small><b class="hz">${esc(L.title.zh)}</b><span class="kl-lt">${esc(kx(L.title))}</span>
+        <span class="v17-meta"><span class="v17-dots" aria-hidden="true">${dots}</span><span>${done ? t('Khatam') : t('{a}/{b} babak', { a: nd, b: KROUNDS.length })} · ${L.vocab.length} ${t('kata')}</span></span></span>${end}</button>`;
+  } catch (e) { console.error('v17Lesson', e); return v17LessonBase(L); }
+};
+
+/* ---- 4. transisi halaman: isi naik lembut hanya saat pindah menu (bukan saat render ulang) ---- */
+const v17AfterBase = afterRender;
+afterRender = function () {
+  v17AfterBase();
+  try {
+    const m = document.getElementById('main'); const key = ROUTE + '|' + (typeof VK !== 'undefined' && VK ? (VK.view || '') + (VK.n || '') : '');
+    if (m && V17.last !== null && V17.last !== key) m.classList.add('v17-in');
+    V17.last = key;
+  } catch (e) {}
+};
+/* topbar: garis & bayangan baru muncul setelah halaman digulir */
+addEventListener('scroll', () => { document.documentElement.classList.toggle('v17-scrolled', scrollY > 6); }, { passive: true });
 
 boot();

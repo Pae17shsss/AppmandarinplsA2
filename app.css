@@ -5318,3 +5318,115 @@ body{background:
 .nt-f .inp { padding: 10px 12px; border-radius: 14px; border: 1px solid var(--gline); background: var(--glass2); color: inherit; font: inherit; }
 .nt-verr { background: var(--glass2); }
 
+
+/* ==== halus.css ==== */
+/* ========== V1.7 "Halus" — gerak lembut, sentuhan responsif, peta lesson berbentuk jalur, strip minggu ==========
+   Hanya memakai variabel tema (terang/gelap ikut otomatis). Dimuat paling akhir. */
+:root{ --v17-ease:cubic-bezier(.22,.8,.26,1); --v17-spring:cubic-bezier(.3,1.45,.5,1); }
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+.main h1,.main h2,.u2-tile b,.kl-tool b{text-wrap:balance}
+.main p,.u2-tile .u2-tx span,.kl-tool span{text-wrap:pretty}
+.kl-stats b,.hero-stats b,.chip.stat-xp,.kpi b,.v17-meta{font-variant-numeric:tabular-nums}
+
+/* ---- sentuhan: semua yang bisa diketuk memberi respons yang sama ---- */
+.btn,.u2-tile,.u2-q,.kl-tool,.kl-lc,.kl-rd,.tab,.nav,.chip[href],.feat,.v17-more,.v17-week{transition:transform .16s var(--v17-ease),box-shadow .2s var(--v17-ease),background-color .2s ease,border-color .2s ease,color .2s ease;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.btn:active,.u2-q:active,.kl-tool:active,.kl-rd:active,.chip[href]:active,.v17-more:active{transform:scale(.965)}
+.u2-tile:active,.kl-lc:active,.feat:active,.v17-week:active{transform:scale(.98)}
+.tab:active .ic{transform:scale(.86)}
+.tab .ic{transition:transform .22s var(--v17-spring)}
+
+/* ---- transisi halaman: isi naik lembut, berurutan ---- */
+.main.v17-in > *:not(.topbar){animation:v17In .34s var(--v17-ease) both}
+.main.v17-in > *:nth-child(3){animation-delay:.04s}
+.main.v17-in > *:nth-child(4){animation-delay:.08s}
+.main.v17-in > *:nth-child(n+5){animation-delay:.12s}
+@keyframes v17In{from{opacity:0;transform:translateY(10px)}}
+
+/* ---- batang progres bergerak halus ---- */
+.bar i,.kl-lbar i,.acc i{transition:width .5s var(--v17-ease);border-radius:inherit}
+
+/* ---- topbar: bersih di atas, garis + bayangan tipis setelah digulir ---- */
+.topbar{border-bottom-color:transparent;transition:border-color .2s ease,box-shadow .2s ease}
+html.v17-scrolled .topbar{border-bottom-color:var(--line);box-shadow:0 8px 20px -18px color-mix(in srgb,var(--ink) 55%,transparent)}
+
+/* ---- navigasi bawah: melayang ringan, tab aktif berbentuk pil ---- */
+@media (max-width:1024px){
+  .tabbar{border:1px solid var(--line);box-shadow:0 1px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 14px 30px -14px color-mix(in srgb,var(--ink) 30%,transparent);background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(16px) saturate(1.5);-webkit-backdrop-filter:blur(16px) saturate(1.5)}
+  html.lite .tabbar{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--surface)}
+  .tab{position:relative;color:var(--ink3)}
+  .tab.on{background:var(--acc-soft);color:var(--acc-h)}
+  .tab.on .ic{color:var(--acc)}
+  .tab .tl{letter-spacing:.01em}
+}
+
+/* ---- strip minggu di hero Beranda ---- */
+.v17-week{display:flex;flex-direction:column;gap:10px;grid-column:1/-1;margin-top:var(--s3);padding:12px 14px;border-radius:18px;background:color-mix(in srgb,var(--surface) 80%,transparent);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.v17-wk-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px}
+.v17-wk-h b{font-weight:750;letter-spacing:.01em}
+.v17-wk-h span{display:inline-flex;align-items:center;gap:4px;color:var(--c8);font-weight:700}
+.v17-wk-h .ic-svg{width:15px;height:15px}
+.v17-wk-d{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.v17-d{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+.v17-d small{font-size:10.5px;font-weight:700;color:var(--ink3);text-transform:capitalize}
+.v17-d i{font-style:normal;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;font-size:12.5px;font-weight:750;color:var(--ink2);background:var(--surface2);border:1.5px solid transparent;transition:background-color .25s ease,transform .3s var(--v17-spring)}
+.v17-d i .ic-svg{width:16px;height:16px;stroke-width:2.6}
+.v17-d.on i{background:var(--acc);color:var(--on-acc)}
+.v17-d.today small{color:var(--acc-h)}
+.v17-d.today:not(.on) i{border-color:var(--acc);background:var(--surface);color:var(--acc-h)}
+.v17-d.next i{color:var(--ink3);background:transparent;border:1.5px dashed var(--line)}
+
+/* ---- Beranda: Jelajahi ringkas ---- */
+.u2-bento:not(.all) > .v17-xtra{display:none}
+.u2-bento.all > .v17-xtra{animation:v17In .3s var(--v17-ease) both}
+.v17-more{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:44px;margin-top:var(--s3);border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--acc-h);font-weight:750;font-size:14px}
+.v17-more .ic-svg{width:16px;height:16px;transform:rotate(90deg);transition:transform .25s var(--v17-ease)}
+.v17-more[aria-expanded="true"] .ic-svg{transform:rotate(-90deg)}
+
+/* ---- Kelas: peta lesson berbentuk jalur ---- */
+.kl-grid{gap:10px}
+.kl-lc.v17-lc{align-items:center;gap:12px;padding:12px 14px;border-radius:20px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-s,none);overflow:visible;min-height:84px}
+.kl-lc.v17-lc::before{display:none}
+.v17-node{position:relative;flex:none;width:52px;height:52px;display:grid;place-items:center;z-index:1;background:var(--surface);border-radius:50%}
+.v17-node > svg{position:absolute;inset:0;width:100%;height:100%}
+.v17-rt{fill:var(--surface2);stroke:var(--line);stroke-width:4}
+.v17-rp{fill:none;stroke:var(--acc);stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset .6s var(--v17-ease)}
+.v17-node > b{position:relative;font-size:17px;font-weight:800;color:var(--ink2);line-height:1;display:grid;place-items:center}
+.v17-node > b .ic-svg{width:20px;height:20px}
+.v17-lb{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.v17-lb > small{font-size:11px;font-weight:650;color:var(--ink3);letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kl-lc.v17-lc b.hz{font-size:19px;margin:0;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kl-lc.v17-lc .kl-lt{margin:0;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v17-meta{display:flex;align-items:center;gap:8px;margin-top:5px;font-size:11.5px;color:var(--ink3);font-weight:600;white-space:nowrap}
+.v17-dots{display:inline-flex;gap:3px;flex:none}
+.v17-dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.v17-dots i.on{background:var(--acc)}
+.v17-end{flex:none;display:grid;place-items:center;color:var(--ink3)}
+.v17-end .ic-svg{width:18px;height:18px}
+.v17-end.v17-go{padding:8px 13px;border-radius:999px;background:var(--acc);color:var(--on-acc);font-size:12.5px;font-weight:800}
+.v17-end.ok{width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.v17-end.ok .ic-svg{width:15px;height:15px;stroke-width:2.8}
+.kl-lc.v17-lc.now{border-color:var(--acc-line);background:linear-gradient(135deg,var(--acc-soft),var(--surface) 70%);box-shadow:var(--u2-shadow)}
+.kl-lc.v17-lc.now .v17-node{background:var(--surface)}
+.kl-lc.v17-lc.now .v17-node > b{color:var(--acc-h)}
+.kl-lc.v17-lc.done .v17-rp{stroke:var(--c3)}
+.kl-lc.v17-lc.done .v17-node > b{color:var(--c3)}
+.kl-lc.v17-lc.done .v17-dots i.on{background:var(--c3)}
+/* HP: satu kolom, lesson tersambung garis jalur */
+@media (max-width:700px){
+  .kl-grid{grid-template-columns:minmax(0,1fr);gap:0;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:6px;box-shadow:var(--u2-shadow)}
+  .kl-lc.v17-lc{border-color:transparent;box-shadow:none;background:transparent;border-radius:18px;min-height:80px}
+  .kl-lc.v17-lc:not(:last-child)::after{content:"";position:absolute;left:39px;top:calc(50% + 26px);height:calc(100% - 52px);width:3px;border-radius:2px;background:var(--line);z-index:0}
+  .kl-lc.v17-lc.done:not(:last-child)::after{background:color-mix(in srgb,var(--c3) 45%,var(--line))}
+  .kl-lc.v17-lc.now{border-color:var(--acc-line)}
+}
+
+/* ---- perbaikan: nomor & centang babak tepat di tengah lingkaran ---- */
+.kl-rd .kl-rn{display:grid;place-items:center;font-size:14.5px;color:var(--acc-h);line-height:1}
+.kl-rd.ok .kl-rn{color:#fff}
+
+/* ---- gerak dikurangi / mode ringan ---- */
+@media (prefers-reduced-motion:reduce){
+  .main.v17-in > *,.u2-bento.all > .v17-xtra{animation:none!important}
+  .btn,.u2-tile,.u2-q,.kl-tool,.kl-lc,.kl-rd,.tab,.tab .ic,.v17-rp,.bar i,.kl-lbar i,.acc i{transition:none!important}
+}
+html.lite .main.v17-in > *{animation-duration:.2s;animation-delay:0s!important}
